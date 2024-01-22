@@ -5,6 +5,9 @@ import Home from "../pages/Home/Home/Home";
 import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import DashboardLoading from "../components/Loading/DashboardLoading";
+
+const Dashboard = React.lazy(() => import("../dashboard/Layout/Dashboard"));
 const Main = React.lazy(() => import("../Layout/Main"));
 
 const router = createBrowserRouter([
@@ -30,6 +33,18 @@ const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    errorElement: <Error />,
+    element: (
+      <Suspense fallback={<DashboardLoading />}>
+        <Dashboard />
+      </Suspense>
+    ),
+    children:[
+      
+    ]
   },
 ]);
 
