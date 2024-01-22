@@ -40,9 +40,9 @@ const onSubmit = async (data) => {
   };
 
   return (
-    <div className="h-[calc(100vh-200px)]  flex justify-center items-center">
+    <div className="lg:h-[calc(100vh-200px)] min-h-screen  flex justify-center items-center">
       <form
-        className="flex flex-col gap-5 border p-5 shadow-lg w-[25%]"
+        className="flex flex-col gap-7 border p-5 shadow-lg mx-2 md:mx-0 rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className="text-3xl font-bold">Create an account</h2>

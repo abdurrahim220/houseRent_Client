@@ -36,8 +36,8 @@ const Login = () => {
 
   return (
     <div className="h-[calc(100vh-200px)]  flex justify-center items-center">
-      <div className="border p-5 shadow-lg mx-2 md:my-0 w-[30%]">
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+      <div className="border p-7 shadow-lg mx-2 md:my-0   md:mx-0 rounded-lg">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col ">
           <h2 className="text-3xl font-bold">Login In</h2>
           <label className="text-gray-700 text-sm font-bold  flex-1">
             Email
@@ -62,7 +62,7 @@ const Login = () => {
             )}
           </label>
 
-          <span className="flex justify-between items-center">
+          <span className="flex justify-between items-center mt-2">
             <div className="text-sm">
               Not Registered? <Link to="/register">Create an account here</Link>
             </div>

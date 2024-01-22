@@ -3,10 +3,10 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  // State to manage the navbar's visibility
+ 
   const [nav, setNav] = useState(false);
 
-  // Toggle function to handle the navbar's display
+ 
   const handleNav = () => {
     setNav(!nav);
   };
@@ -54,12 +54,11 @@ const Navbar = () => {
 
         {/* Mobile Navigation Items */}
         {navItems.map((item) => (
-          <li
-            key={item.id}
-            className="p-4 border-b rounded-xl hover:bg-[#00df9a] duration-300 hover:text-black cursor-pointer border-gray-600"
-          >
-            {item.text}
-          </li>
+          <Link to={item.link} key={item.id}>
+            <li className="p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black">
+              {item.text}
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
