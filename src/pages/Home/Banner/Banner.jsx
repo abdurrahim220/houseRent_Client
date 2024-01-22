@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import Search from "../Search/Search";
 
 const Banner = () => {
   const images = [
@@ -22,6 +23,7 @@ const Banner = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <Search/>
     </section>
   );
 };
