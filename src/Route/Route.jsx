@@ -11,6 +11,7 @@ import AddNewHouse from "../dashboard/pages/AddNewHouse";
 const Dashboard = React.lazy(() => import("../dashboard/Layout/Dashboard"));
 const Main = React.lazy(() => import("../Layout/Main"));
 import DashboardHome from '../dashboard/Home/DashboardHome';
+import HouseDetails from '../pages/HouseDetails/HouseDetails';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/property/:id",
+        element: <HouseDetails/>,
       },
     ],
   },
