@@ -1,21 +1,34 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useProperty from "../hooks/useProperty";
 
 export const HomeContext = createContext();
 
 const HomeContextProvider = ({ children }) => {
   const [properties] = useProperty();
-  // console.log(properties)
+  // console.log(properties);
 
   const [city, setCity] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
   const [bathroom, setBathroom] = useState([]);
   const [price, setPrice] = useState([]);
-  const [room, setRoom] = useState([]);
+  const [size, setSize] = useState([]);
   const [availability, setAvailability] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    // Check if properties is not empty
+    if (properties.length > 0) {
+      // Extract unique cities from the properties array
+      const uniqueCities = [...new Set(properties.map(property => property.city))];
+  
+      // Set the unique cities to the state
+      setCity(uniqueCities);
+    }
+  }, [properties]);
 
-  const [loading,setLoading]=useState(false)
+  const handleClick = ()=>{
+    // console.log("click")
+  }
 
   return (
     <HomeContext.Provider
@@ -28,10 +41,12 @@ const HomeContextProvider = ({ children }) => {
         setBathroom,
         price,
         setPrice,
-        room,
-        setRoom,
+        size, setSize,
         availability,
-        setAvailability,loading,properties
+        setAvailability,
+        loading,
+        properties,
+        handleClick
       }}
     >
       {children}

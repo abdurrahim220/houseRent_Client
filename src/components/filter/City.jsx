@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { HomeContext } from '../../Provider/HomeContext';
+import { FaLocationDot } from 'react-icons/fa6';
 
 const City = () => {
-  return (
-    <div>City</div>
-  )
-}
+  const { city, setCity } = useContext(HomeContext);
 
-export default City
+  const handleCityChange = (e) => {
+  
+    setCity(e.target.value);
+  };
+
+  return (
+    <div className="flex items-center space-x-2">
+      <FaLocationDot className="text-xl" />
+      <select
+        className="border p-2 rounded"
+        value={city}
+        onChange={handleCityChange}
+      >    
+        <option value="">Select City</option>    
+        {city.map((cityName) => (
+          <option key={cityName} value={cityName}>
+            {cityName}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default City;

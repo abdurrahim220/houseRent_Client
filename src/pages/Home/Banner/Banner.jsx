@@ -23,7 +23,7 @@ const Banner = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Search/>
+      {/* <Search/> */}
     </section>
   );
 };
