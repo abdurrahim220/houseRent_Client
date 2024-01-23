@@ -6,7 +6,6 @@ const City = () => {
   const { city, setCity } = useContext(HomeContext);
 
   const handleCityChange = (e) => {
-  
     setCity(e.target.value);
   };
 
@@ -18,12 +17,15 @@ const City = () => {
         value={city}
         onChange={handleCityChange}
       >    
-        <option value="">Select City</option>    
-        {city.map((cityName) => (
-          <option key={cityName} value={cityName}>
-            {cityName}
-          </option>
-        ))}
+        <option value="">Select City</option>
+        {/* Check if city is an array before mapping */}
+        {Array.isArray(city) &&
+          city.map((cityName) => (
+            <option key={cityName} value={cityName}>
+              {cityName}
+            </option>
+          ))
+        }
       </select>
     </div>
   );

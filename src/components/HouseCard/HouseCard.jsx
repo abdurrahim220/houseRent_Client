@@ -47,6 +47,9 @@ const HouseCard = ({ house }) => {
             Rent: 
         <span className="text-lg font-semibold text-red-500">{rent}</span>
         </div>
+        <div>
+          {availability}
+        </div>
       </div>
     </div>
   );

@@ -5,30 +5,42 @@ export const HomeContext = createContext();
 
 const HomeContextProvider = ({ children }) => {
   const [properties] = useProperty();
-  // console.log(properties);
 
   const [city, setCity] = useState([]);
   const [bedRoom, setBedRoom] = useState([]);
   const [bathroom, setBathroom] = useState([]);
-  const [price, setPrice] = useState([]);
+  const [rent, setPrice] = useState([]);
   const [size, setSize] = useState([]);
   const [availability, setAvailability] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [filteredProperties, setFilteredProperties] = useState([]);
   useEffect(() => {
-    // Check if properties is not empty
     if (properties.length > 0) {
-      // Extract unique cities from the properties array
-      const uniqueCities = [...new Set(properties.map(property => property.city))];
-  
-      // Set the unique cities to the state
+      const uniqueCities = [
+        ...new Set(properties.map((property) => property.city)),
+      ];
+
       setCity(uniqueCities);
     }
   }, [properties]);
 
-  const handleClick = ()=>{
-    // console.log("click")
-  }
+
+  useEffect(() => {
+    let newFilteredProperties = [...properties];
+
+    if (city) {
+      newFilteredProperties = newFilteredProperties.filter(
+        (property) => city.includes(property.city)
+      );
+    }
+
+    setFilteredProperties(newFilteredProperties);
+  }, [city, bedRoom, bathroom, rent, size, availability, properties]);
+
+  const handleClick = () => {
+    // console.log(filteredProperties);
+  };
+  
 
   return (
     <HomeContext.Provider
@@ -39,14 +51,15 @@ const HomeContextProvider = ({ children }) => {
         setBedRoom,
         bathroom,
         setBathroom,
-        price,
+        rent,
         setPrice,
-        size, setSize,
+        size,
+        setSize,
         availability,
         setAvailability,
         loading,
-        properties,
-        handleClick
+        properties: filteredProperties,
+        handleClick,
       }}
     >
       {children}

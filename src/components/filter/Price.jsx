@@ -3,7 +3,7 @@ import { MdOutlinePriceChange } from 'react-icons/md';
 import { HomeContext } from '../../Provider/HomeContext';
 
 const Price = () => {
-  const { price, setPrice } = useContext(HomeContext);
+  const { rent, setPrice } = useContext(HomeContext);
 
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
@@ -15,12 +15,12 @@ const Price = () => {
       <input
         type="range"
         min="0"
-        max="100000" 
+        max="10000" 
         step="10"  
-        value={price}
+        value={rent}
         onChange={handlePriceChange}
       />
-      <span>{price}</span>
+      <span>{rent}</span>
     </div>
   );
 };

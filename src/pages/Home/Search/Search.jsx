@@ -19,9 +19,9 @@ const Search = () => {
       <Price />
       <RoomSize />
       <Availability />
-      <button onClick={()=>handleClick()} className="bg-violet-700 hover:bg-violet-900 rounded-lg h-16 transition w-full lg:max-w-[162px] flex justify-center items-center text-white">
+      {/* <button onClick={()=>handleClick()} className="bg-violet-700 hover:bg-violet-900 rounded-lg h-16 transition w-full lg:max-w-[162px] flex justify-center items-center text-white">
         <RiSearch2Line size={30} />
-      </button>
+      </button> */}
     </div>
   );
 };
