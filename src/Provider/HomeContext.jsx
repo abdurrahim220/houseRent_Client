@@ -14,6 +14,7 @@ const HomeContextProvider = ({ children }) => {
   const [availability, setAvailability] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredProperties, setFilteredProperties] = useState([]);
+
   useEffect(() => {
     if (properties.length > 0) {
       const uniqueCities = [
@@ -29,13 +30,17 @@ const HomeContextProvider = ({ children }) => {
     let newFilteredProperties = [...properties];
 
     if (city) {
-      newFilteredProperties = newFilteredProperties.filter(
-        (property) => city.includes(property.city)
-      );
+      setLoading(true); 
+      setTimeout(() => {
+        newFilteredProperties = newFilteredProperties.filter(
+          (property) => city.includes(property.city)
+        );
+        setFilteredProperties(newFilteredProperties);
+        setLoading(false); 
+      }, 1000);
     }
-
-    setFilteredProperties(newFilteredProperties);
   }, [city, bedRoom, bathroom, rent, size, availability, properties]);
+
 
   const handleClick = () => {
     // console.log(filteredProperties);
