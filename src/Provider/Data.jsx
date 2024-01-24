@@ -8,7 +8,7 @@ const UserProfile = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/auth/validate-token`,
+          `https://househunter-a83p.onrender.com/api/auth/validate-token`,
           {
             credentials: "include",
           }

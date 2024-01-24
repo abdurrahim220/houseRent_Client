@@ -12,7 +12,7 @@ const DashboardHome = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetch("http://localhost:5000/api/properties")
+    fetch("https://househunter-a83p.onrender.com/api/properties")
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);
@@ -33,7 +33,7 @@ const DashboardHome = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // If user confirms, proceed with delete
-        fetch(`http://localhost:5000/api/properties/${id}`, {
+        fetch(`https://househunter-a83p.onrender.com/api/properties/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

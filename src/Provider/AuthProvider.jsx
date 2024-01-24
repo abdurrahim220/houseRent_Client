@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
   const getUser = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/auth/validate-token",
+        "https://househunter-a83p.onrender.com/api/auth/validate-token",
         {
           withCredentials: true,
         }

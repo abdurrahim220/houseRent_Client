@@ -14,7 +14,7 @@ const EditHouse = () => {
         setIsLoading(true);
 
         const response = await axios.get(
-          `http://localhost:5000/api/properties/${id}`
+          `https://househunter-a83p.onrender.com/api/properties/${id}`
         );
 
         setIsHouse(response.data);
@@ -33,7 +33,7 @@ const EditHouse = () => {
       setIsLoading(true);
 
       const response = await axios.put(
-        `http://localhost:5000/api/properties/${id}`,
+        `https://househunter-a83p.onrender.com/api/properties/${id}`,
         FormData
       );
 
