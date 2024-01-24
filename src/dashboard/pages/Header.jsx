@@ -14,7 +14,7 @@ const Header = () => {
     { id: 1, text: "Home", link: "/" },
     { id: 2, text: "Dashboard", link: "/dashboard" },
     { id: 3, text: "Add New House", link: "/dashboard/addNewHouse" },
-    { id: 4, text: "Contact", link: "/" },
+    { id: 4, text: "Booked House", link: "/dashboard/bookedHouse" },
     { id: 5, text: "Login", link: "login" },
   ];
   const navItems = [

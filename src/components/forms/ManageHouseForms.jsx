@@ -1,7 +1,7 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
-import ImageFields from "./ImageFields";
+
 import TypesSection from "./TypesSection";
 
 const ManageHouseForms = ({ onSave, isLoading }) => {

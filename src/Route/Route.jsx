@@ -10,8 +10,10 @@ import AddNewHouse from "../dashboard/pages/AddNewHouse";
 
 const Dashboard = React.lazy(() => import("../dashboard/Layout/Dashboard"));
 const Main = React.lazy(() => import("../Layout/Main"));
-import DashboardHome from '../dashboard/Home/DashboardHome';
-import HouseDetails from '../pages/HouseDetails/HouseDetails';
+import DashboardHome from "../dashboard/Home/DashboardHome";
+import HouseDetails from "../pages/HouseDetails/HouseDetails";
+import BookedHouse from "../dashboard/pages/BookedHouse";
+import EditHouse from "../dashboard/pages/EditHouse";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/property/:id",
-        element: <HouseDetails/>,
+        element: <HouseDetails />,
       },
     ],
   },
@@ -49,20 +51,24 @@ const router = createBrowserRouter([
         <Dashboard />
       </Suspense>
     ),
-    children:[
+    children: [
       {
-        path:"/dashboard",
-        element:<DashboardHome/>
+        path: "/dashboard",
+        element: <DashboardHome />,
       },
       {
-        path:"/dashboard/addNewHouse",
-        element:<AddNewHouse/>
+        path: "/dashboard/addNewHouse",
+        element: <AddNewHouse />,
       },
       {
-        path:"/dashboard/bookedHouse",
-        element:<AddNewHouse/>
-      }
-    ]
+        path: "/dashboard/editHouse/:id",
+        element: <EditHouse />,
+      },
+      {
+        path: "/dashboard/bookedHouse",
+        element: <BookedHouse />,
+      },
+    ],
   },
 ]);
 

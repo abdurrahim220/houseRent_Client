@@ -7,7 +7,7 @@ import Sidebar from "../pages/Sidebar";
 const Dashboard = () => {
   return (
     <div className="flex flex-col lg:flex-row h-screen">
-      <aside className="w-full sticky lg:w-1/6 lg:block hidden bg-[#3A4264] p-4">
+      <aside className="w-full h-auto sticky lg:w-1/6 lg:block hidden bg-[#3A4264] p-4">
         <Sidebar />
       </aside>
 
@@ -16,7 +16,7 @@ const Dashboard = () => {
           <Header />
         </header>
 
-        <main className="flex-1 bg-[#8FD4DA] p-4">
+        <main className="flex-1 bg-[#8FD4DA] p-4 sticky">
          <Outlet/>
         </main>
 
