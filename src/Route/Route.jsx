@@ -57,6 +57,10 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/addNewHouse",
         element:<AddNewHouse/>
+      },
+      {
+        path:"/dashboard/bookedHouse",
+        element:<AddNewHouse/>
       }
     ]
   },

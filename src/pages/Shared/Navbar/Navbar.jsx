@@ -12,7 +12,7 @@ const Navbar = () => {
   // Array containing navigation items
   const navItems = [
     { id: 1, text: "Home", link: "/" },
-    { id: 2, text: "Company", link: "/" },
+    { id: 2, text: "Dashboard", link: "/dashboard" },
     { id: 3, text: "Resources", link: "/" },
     { id: 4, text: "Contact", link: "/" },
     { id: 5, text: "Login", link: "login" },
