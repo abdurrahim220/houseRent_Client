@@ -1,16 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HomeContext } from "../../Provider/HomeContext";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import Swal from 'sweetalert2';
 import NormalLoading from "../../components/Loading/NormalLoading";
 import { BiArea, BiBath, BiBed } from "react-icons/bi";
 const HouseDetails = () => {
   const { id } = useParams();
+
+
+  const email ="";
+  
 
   // console.log(id)
   const { properties, loading } = useContext(HomeContext);
@@ -29,6 +28,7 @@ const HouseDetails = () => {
   }
 
   const {
+    _id,
     name,
     address,
     city,
@@ -42,6 +42,32 @@ const HouseDetails = () => {
     starRating,
     description,
   } = house;
+
+  const handleBook = async () => {
+    
+    try {
+      const response = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(house),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Booking successful!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        // console.error("Booking failed");
+      }
+    } catch (error) {
+      console.error("Error during booking:", error);
+    }
+  };
 
   return (
     <section>
@@ -90,10 +116,25 @@ const HouseDetails = () => {
               <div>
                 <h1>User Name</h1>
               </div>
-              <form action="" className="flex gap-4 flex-col">
-                <input  className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"  type="text" placeholder="email" />
-                <input className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"  type="text" placeholder="phone number"/>
-                <button type="submit" className="bg-violet-700 hover:bg-violet-200 text-white rounded-md p-4 text-sm w-full transition">Book Now</button>
+              <form onSubmit={(e) => e.preventDefault()} className="flex gap-4 flex-col">
+                <input
+                  className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"
+                  type="email"
+                  placeholder="email"
+                />
+                <input
+                  className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"
+                  type="number"
+                  placeholder="phone number"
+                />
+                <button
+                  
+                  type="submit"
+                  onClick={() => handleBook()} 
+                  className="bg-violet-700 hover:bg-violet-200 text-white rounded-md p-4 text-sm w-full transition"
+                >
+                  Book Now
+                </button>
               </form>
             </div>
           </div>

@@ -97,8 +97,8 @@ const DashboardHome = () => {
             <tbody className="block md:table-row-group" key={index}>
               <tr
                 className={`${
-                  (index + 1) % 2 === 0 ? "bg-white text-black" : "bg-gray-300"
-                } text-white border border-grey-500 md:border-none block md:table-row`}
+                  (index + 1) % 2 === 0 ? "bg-white " : "bg-gray-300"
+                }  text-black border border-grey-500 md:border-none block md:table-row`}
               >
                 <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
                   <span className="inline-block w-1/3 md:hidden font-bold">
