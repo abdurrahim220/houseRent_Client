@@ -5,6 +5,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const {setUser,user} = useContext(AuthContext)
@@ -17,7 +18,7 @@ const Navbar = () => {
   // Array containing navigation items
   const navItems = [
     { id: 1, text: "Home", link: "/" },
-    { id: 2, text: "Dashboard", link: "/dashboard" },
+
     { id: 3, text: "Resources", link: "/" },
     { id: 4, text: "Contact", link: "/" },
     
@@ -27,12 +28,20 @@ const Navbar = () => {
     if (user) {
       
       return (
-        <li
+      <>
+       <li
           className="p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black"
           onClick={handleLogout}
         >
           Logout
         </li>
+        <Link to={"/dashboard"}
+          className="p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black"
+         
+        >
+          Dashboard
+        </Link>
+      </>
       );
     } else {
      

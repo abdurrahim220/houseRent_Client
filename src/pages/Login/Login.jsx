@@ -14,7 +14,7 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
-
+  // const from = location.state?.from?.pathname || "/";
   const onSubmit = async (data) => {
     try {
       setLoading(true); 
@@ -25,6 +25,7 @@ const Login = () => {
 
       setUser(response.data);
       navigate("/dashboard");
+      // navigate(from, { replace: true });
       Swal.fire({
         position: "top-end",
         icon: "success",
