@@ -24,7 +24,7 @@ const Login = () => {
       );
 
       setUser(response.data);
-      navigate("/");
+      navigate("/dashboard");
       Swal.fire({
         position: "top-end",
         icon: "success",

@@ -14,6 +14,7 @@ import DashboardHome from "../dashboard/Home/DashboardHome";
 import HouseDetails from "../pages/HouseDetails/HouseDetails";
 import BookedHouse from "../dashboard/pages/BookedHouse";
 import EditHouse from "../dashboard/pages/EditHouse";
+import DashboardLayout from "../dashboard/Layout/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <DashboardHome />,
+        element: <DashboardLayout />,
       },
       {
         path: "/dashboard/addNewHouse",

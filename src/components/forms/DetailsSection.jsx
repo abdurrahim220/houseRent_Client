@@ -1,6 +1,9 @@
 import { useFormContext } from "react-hook-form";
+import { AuthContext } from '../../Provider/AuthProvider';
+import { useContext } from "react";
 
 const DetailsSection = () => {
+  const { user } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -9,17 +12,37 @@ const DetailsSection = () => {
     <div className="flex flex-col gap-4">
       <h1 className="text-3xl font-bold mb-3">Add House</h1>
 
-      <label className="text-gray-700 text-sm font-bold flex-1">
-        Name
-        <input
-          type="text"
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("name", { required: "This field is required" })}
-        ></input>
-        {errors.name && (
-          <span className="text-red-500">{errors.name.message}</span>
-        )}
-      </label>
+      <div className="flex gap-4">
+        <label className="text-gray-700 text-sm font-bold flex-1">
+          Name
+          <input
+            type="text"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("name", {
+              required: "This field is required",
+            })}
+            defaultValue={user ? user.username : ""} 
+          ></input>
+          {errors.name && (
+            <span className="text-red-500">{errors.name.message}</span>
+          )}
+        </label>
+
+        <label className="text-gray-700 text-sm font-bold flex-1">
+          Email
+          <input
+            type="text"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("email", {
+              required: "This field is required",
+            })}
+            defaultValue={user ? user.email : ""}
+          ></input>
+          {errors.email && (
+            <span className="text-red-500">{errors.email.message}</span>
+          )}
+        </label>
+      </div>
 
       <div className="flex gap-4">
         <label className="text-gray-700 text-sm font-bold flex-1">
@@ -57,54 +80,54 @@ const DetailsSection = () => {
         )}
       </label>
       <div className="grid sm:grid-cols-3 gap-2 p-6 bg-gray-300">
-      <label className="text-gray-700 text-sm flex-1 font-bold max-w-[50%]">
-        Mobile Number
-        <input
-          type="tel"
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("phoneNumber", { required: "This field is required" })}
-        ></input>
-        {errors.phoneNumber && (
-          <span className="text-red-500">{errors.phoneNumber.message}</span>
-        )}
-      </label>
-      <label className="text-gray-700 text-sm flex-1 font-bold max-w-[50%]">
-        Rent Per Month
-        <input
-          type="number"
-          min={1}
-          className="border rounded w-full py-1 px-2 font-normal"
-          {...register("rent", { required: "This field is required" })}
-        ></input>
-        {errors.rent && (
-          <span className="text-red-500">{errors.rent.message}</span>
-        )}
-      </label>
+        <label className="text-gray-700 text-sm flex-1 font-bold max-w-[50%]">
+          Mobile Number
+          <input
+            type="tel"
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("phoneNumber", { required: "This field is required" })}
+          ></input>
+          {errors.phoneNumber && (
+            <span className="text-red-500">{errors.phoneNumber.message}</span>
+          )}
+        </label>
+        <label className="text-gray-700 text-sm flex-1 font-bold max-w-[50%]">
+          Rent Per Month
+          <input
+            type="number"
+            min={1}
+            className="border rounded w-full py-1 px-2 font-normal"
+            {...register("rent", { required: "This field is required" })}
+          ></input>
+          {errors.rent && (
+            <span className="text-red-500">{errors.rent.message}</span>
+          )}
+        </label>
 
-      <label className="text-gray-700 text-sm font-bold flex-1 max-w-[50%]">
-        Star Rating
-        <select
-          {...register("starRating", {
-            required: "This field is required",
-          })}
-          className="border rounded w-full p-2 text-gray-700 font-normal"
-        >
-          <option value="" className="text-sm font-bold">
-            Select as Rating
-          </option>
+        <label className="text-gray-700 text-sm font-bold flex-1 max-w-[50%]">
+          Star Rating
+          <select
+            {...register("starRating", {
+              required: "This field is required",
+            })}
+            className="border rounded w-full p-2 text-gray-700 font-normal"
+          >
+            <option value="" className="text-sm font-bold">
+              Select as Rating
+            </option>
 
-          {[1, 2, 3, 4, 5].map((num, index) => {
-            return (
-              <option key={index} value={num}>
-                {num}
-              </option>
-            );
-          })}
-        </select>
-        {errors.starRating && (
-          <span className="text-red-500">{errors.starRating.message}</span>
-        )}
-      </label>
+            {[1, 2, 3, 4, 5].map((num, index) => {
+              return (
+                <option key={index} value={num}>
+                  {num}
+                </option>
+              );
+            })}
+          </select>
+          {errors.starRating && (
+            <span className="text-red-500">{errors.starRating.message}</span>
+          )}
+        </label>
       </div>
     </div>
   );

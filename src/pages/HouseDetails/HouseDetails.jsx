@@ -1,17 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HomeContext } from "../../Provider/HomeContext";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import NormalLoading from "../../components/Loading/NormalLoading";
 import { BiArea, BiBath, BiBed } from "react-icons/bi";
+import { AuthContext } from "../../Provider/AuthProvider";
 const HouseDetails = () => {
   const { id } = useParams();
 
+  const { user } = useContext(AuthContext);
 
-  const email ="";
-  
-
-  // console.log(id)
   const { properties, loading } = useContext(HomeContext);
   if (loading || !properties) {
     return (
@@ -43,31 +41,52 @@ const HouseDetails = () => {
     description,
   } = house;
 
-  const handleBook = async () => {
-    
+  const handleBook = async (event) => {
+    event.preventDefault();
+  
+   
+    const email = event.target.elements.email.value;
+    const userNumber = event.target.elements.userNumber.value;
+  
     try {
-      const response = await fetch("http://localhost:5000/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(house),
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Booking successful!',
-          showConfirmButton: false,
-          timer: 1500,
+      
+      const response = await fetch(`http://localhost:5000/api/bookings?email=${user.email}`);
+      const existingBookings = await response.json();
+  
+    
+      if (existingBookings.length < 2) {
+        
+        const bookingResponse = await fetch("http://localhost:5000/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...house, email, userNumber }),
         });
+  
+        if (bookingResponse.ok) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Booking successful!',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          
+        }
       } else {
-        // console.error("Booking failed");
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Booking Limit Exceeded',
+          text: 'You can only book up to 2 houses. Remove a previous booking to add a new one.',
+        });
       }
     } catch (error) {
       console.error("Error during booking:", error);
     }
   };
+  
 
   return (
     <section>
@@ -116,21 +135,23 @@ const HouseDetails = () => {
               <div>
                 <h1>User Name</h1>
               </div>
-              <form onSubmit={(e) => e.preventDefault()} className="flex gap-4 flex-col">
+              <form onSubmit={handleBook} className="flex gap-4 flex-col">
                 <input
                   className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"
                   type="email"
+                  defaultValue={user.email}
                   placeholder="email"
+                  name="email"
                 />
                 <input
                   className="border border-gray-300 focus:border-violet-700 outline-none rounded-md w-full p-4 h-12 text-sm text-gray-400"
                   type="number"
                   placeholder="phone number"
+                  name="userNumber" //
+                  required
                 />
                 <button
-                  
                   type="submit"
-                  onClick={() => handleBook()} 
                   className="bg-violet-700 hover:bg-violet-200 text-white rounded-md p-4 text-sm w-full transition"
                 >
                   Book Now

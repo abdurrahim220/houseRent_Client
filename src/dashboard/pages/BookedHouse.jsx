@@ -45,17 +45,11 @@ const BookedHouse = () => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-            } else {
-              Swal.fire({
-                title: "Error",
-                text: `Failed to delete property: ${data.message}`,
-                icon: "error",
-              });
             }
           })
           .catch((error) => {
             // Handle fetch or other errors
-            console.error("Error during delete operation:", error);
+            // console.error("Error during delete operation:", error);
           });
       }
     });
