@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 const Login = () => {
+
+  const { setUser, setLoading } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -14,23 +17,25 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true); 
       const response = await axios.post(
-        "https://househunter-a83p.onrender.com/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         data
       );
 
-      //   console.log(response.data);
+      setUser(response.data);
       navigate("/");
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Your have successfully login",
+        title: "You have successfully logged in",
         showConfirmButton: false,
         timer: 1500,
       });
     } catch (error) {
-      // Handle errors
       console.error("Error sending data to backend", error);
+    } finally {
+      setLoading(false); 
     }
   };
 

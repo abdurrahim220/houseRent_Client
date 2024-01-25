@@ -20,7 +20,7 @@ const Register = () => {
 const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "https://househunter-a83p.onrender.com/api/auth/register",
+        "http://localhost:5000/api/auth/register",
         data
       );
 

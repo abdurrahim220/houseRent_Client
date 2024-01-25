@@ -7,15 +7,18 @@ const AddNewHouse = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async (FormData) => {
+    // console.log()
     try {
       setIsLoading(true);
 
       const response = await axios.post(
-        "https://househunter-a83p.onrender.com/api/properties",
+        "http://localhost:5000/api/properties",
         FormData
       );
 
       setIsLoading(false);
+
+      console.log(response)
     
       Swal.fire({
         position: "top-end",

@@ -5,7 +5,7 @@ const useProperty = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://househunter-a83p.onrender.com/api/properties")
+    fetch("http://localhost:5000/api/properties")
       .then((res) => res.json())
       .then((data) => {
         setProperties(data);

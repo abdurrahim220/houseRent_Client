@@ -1,12 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
-
 import axios from "axios";
 
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  console.log(user);
+  const [user, setUser] = useState(() => {
+    // Retrieve user data from localStorage or set to null by default
+    return JSON.parse(localStorage.getItem("user")) || null;
+  });
+  const [loading, setLoading] = useState(() => {
+    // Retrieve loading state from localStorage or set to true by default
+    return JSON.parse(localStorage.getItem("loading")) || true;
+  });
 
   useEffect(() => {
     getUser();
@@ -14,24 +19,34 @@ const AuthProvider = ({ children }) => {
 
   const getUser = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(
-        "https://househunter-a83p.onrender.com/api/auth/validate-token",
+        "http://localhost:5000/api/auth/validate-token",
         {
           withCredentials: true,
         }
       );
-      console.log(res.data);
-      // setUser(res.data);
+      setUser(res.data);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const authInfo = {
     user,
     setUser,
+    loading,
+    setLoading,
   };
-  // console.log(user);
+
+  useEffect(() => {
+    // Save user data and loading state to localStorage whenever they change
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("loading", JSON.stringify(loading));
+  }, [user, loading]);
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
